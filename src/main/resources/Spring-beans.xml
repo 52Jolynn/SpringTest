@@ -5,8 +5,15 @@
   http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd"
 	default-lazy-init="true">
 
+	<bean id="projectConfig"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="location" value="project.properties" />
+	</bean>
+
 	<bean id="helloBean" class="com.laudandjolynn.springtest.springtechmanual.HelloBean">
-		<property name="helloWorld" value="Hello! Justin!"></property>
+		<property name="helloWorld" value="Hello! Justin!" />
+		<property name="author" value="${Author}" />
+		<property name="email" value="${Email}" />
 	</bean>
 
 	<bean id="helloBean2"
@@ -80,4 +87,17 @@
 		</property>
 	</bean>
 
+	<bean id="sysMessage" class="com.laudandjolynn.springtest.springtechmanual.Message"
+		scope="prototype" />
+	<bean id="messageManager"
+		class="com.laudandjolynn.springtest.springtechmanual.MessageManager">
+		<lookup-method name="createMessage" bean="sysMessage" />
+	</bean>
+
+
+	<!-- 国际化支持 -->
+	<bean id="messageSource"
+		class="org.springframework.context.support.ResourceBundleMessageSource">
+		<property name="basename" value="messages" />
+	</bean>
 </beans>

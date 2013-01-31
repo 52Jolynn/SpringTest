@@ -22,7 +22,7 @@ public class HelloBeanDemo {
 		Resource resource = new ClassPathResource("applicationContext.xml");
 		BeanFactory factory = new XmlBeanFactory(resource);
 		HelloBean helloBean = (HelloBean) factory.getBean("helloBean");
-		log.debug(helloBean.getHelloWorld());
+		log.debug(helloBean.toString());
 
 		HelloBean2 helloBean2 = (HelloBean2) factory.getBean("helloBean2");
 		log.debug(helloBean2.toString());
