@@ -9,7 +9,6 @@
 		<property name="helloWorld" value="Hello! Justin!"></property>
 	</bean>
 
-<<<<<<< HEAD
 	<bean id="helloBean2"
 		class="com.laudandjolynn.springtest.springtechmanual.HelloBean2">
 		<constructor-arg value="Justin" index="0" />
@@ -36,13 +35,49 @@
 	<bean id="someBean" class="com.laudandjolynn.springtest.springtechmanual.SomeBean"
 		parent="abstractSomeBean">
 		<property name="age" value="21" />
-=======
-	<bean id="writter"
-		class="com.laudandjolynn.springtest.springtechmanual.FloppyWritter" />
-
-	<bean id="deviceWritterBusiness"
-		class="com.laudandjolynn.springtest.springtechmanual.DeviceWritterBusiness">
-		<property name="writter" ref="writter"></property>
->>>>>>> refs/heads/origin
 	</bean>
+
+	<bean id="someBean2" class="com.laudandjolynn.springtest.springtechmanual.SomeBean"
+		parent="abstractSomeBean">
+		<property name="age" value="19" />
+	</bean>
+
+	<bean id="someBean3" class="com.laudandjolynn.springtest.springtechmanual.SomeBean"
+		parent="abstractSomeBean">
+		<property name="age" value="26" />
+	</bean>
+
+	<bean id="collectionBean"
+		class="com.laudandjolynn.springtest.springtechmanual.CollectionBean">
+		<property name="someStrArray">
+			<list>
+				<value>hello</value>
+				<value>welcome</value>
+			</list>
+		</property>
+		<property name="someObjArray">
+			<list>
+				<ref bean="someBean" />
+				<ref bean="someBean2" />
+				<ref bean="someBean3" />
+			</list>
+		</property>
+		<property name="someList">
+			<list>
+				<value>listString1</value>
+				<value>listString2</value>
+			</list>
+		</property>
+		<property name="someMap">
+			<map>
+				<entry key="ttt">
+					<value>mapString1</value>
+				</entry>
+				<entry key="ttt2">
+					<value>mapString2</value>
+				</entry>
+			</map>
+		</property>
+	</bean>
+
 </beans>
