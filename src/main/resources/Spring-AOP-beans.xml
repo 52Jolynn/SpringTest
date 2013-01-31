@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="
+  http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+  http://www.springframework.org/schema/util  http://www.springframework.org/schema/util/spring-util-2.0.xsd
+  http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd"
+	default-lazy-init="true">
+
+	<bean id="logBeforeAdvice"
+		class="com.laudandjolynn.springtest.springtechmanual.aop.LogBeforeAdvice" />
+
+	<bean id="logAfterAdvice"
+		class="com.laudandjolynn.springtest.springtechmanual.aop.LogAfterAdvice" />
+
+	<bean id="helloSpeaker"
+		class="com.laudandjolynn.springtest.springtechmanual.aop.HelloSpeaker" />
+
+	<bean id="helloSpeakerProxy" class="org.springframework.aop.framework.ProxyFactoryBean">
+		<!--是否使用cglib生成代理对象，否则使用JDK动态代理生成 -->
+		<property name="proxyTargetClass" value="false" />
+		<!-- 代理接口 -->
+		<property name="proxyInterfaces"
+			value="com.laudandjolynn.springtest.springtechmanual.aop.IHello" />
+		<!-- 被代理对象 -->
+		<property name="target" ref="helloSpeaker" />
+		<!-- 拦截器/Advice -->
+		<property name="interceptorNames">
+			<list>
+				<value>logBeforeAdvice</value>
+				<value>logAfterAdvice</value>
+				<value>someThrowAdvice</value>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="logInteceptor"
+		class="com.laudandjolynn.springtest.springtechmanual.aop.LogInteceptor" />
+
+	<bean id="helloSpeakerProxy2" class="org.springframework.aop.framework.ProxyFactoryBean">
+		<!--是否使用cglib生成代理对象，否则使用JDK动态代理生成 -->
+		<property name="proxyTargetClass" value="false" />
+		<!-- 代理接口 -->
+		<property name="proxyInterfaces"
+			value="com.laudandjolynn.springtest.springtechmanual.aop.IHello" />
+		<!-- 被代理对象 -->
+		<property name="target" ref="helloSpeaker" />
+		<!-- 拦截器/Advice -->
+		<property name="interceptorNames">
+			<list>
+				<value>logInteceptor</value>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="someThrowAdvice"
+		class="com.laudandjolynn.springtest.springtechmanual.aop.SomeThrowAdvice" />
+
+	<bean id="helloAdvisor"
+		class="org.springframework.aop.support.NameMatchMethodPointcutAdvisor">
+		<property name="mappedName" value="*newbie" />
+		<property name="advice" ref="logBeforeAdvice" />
+	</bean>
+
+	<bean id="helloSpeakerProxy3" class="org.springframework.aop.framework.ProxyFactoryBean">
+		<!--是否使用cglib生成代理对象，否则使用JDK动态代理生成 -->
+		<property name="proxyTargetClass" value="false" />
+		<!-- 代理接口 -->
+		<property name="proxyInterfaces"
+			value="com.laudandjolynn.springtest.springtechmanual.aop.IHello" />
+		<!-- 被代理对象 -->
+		<property name="target" ref="helloSpeaker" />
+		<!-- 拦截器/Advice -->
+		<property name="interceptorNames">
+			<list>
+				<value>helloAdvisor</value>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="logBeforeAdvice2"
+		class="com.laudandjolynn.springtest.springtechmanual.aop.LogBeforeAdvice2" />
+
+	<aop:config>
+		<aop:aspect id="logging" ref="logBeforeAdvice2">
+			<aop:before method="before"
+				pointcut="execution(* com.laudandjolynn.springtest.springtechmanual.aop.IHello.*(..))" />
+		</aop:aspect>
+	</aop:config>
+
+	<!-- 注解方式 -->
+	<!-- 需要打开<aop:aspectj-autoproxy />支持 -->
+	<bean id="logBeforeAdviceAnnotation"
+		class="com.laudandjolynn.springtest.springtechmanual.aop.LogBeforeAdviceAnnotation" />
+</beans>

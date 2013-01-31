@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
 	xsi:schemaLocation="
-  http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd"
+  http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+  http://www.springframework.org/schema/util  http://www.springframework.org/schema/util/spring-util-2.0.xsd"
 	default-lazy-init="true">
 
 	<bean id="projectConfig"
@@ -69,12 +70,7 @@
 				<ref bean="someBean3" />
 			</list>
 		</property>
-		<property name="someList">
-			<list>
-				<value>listString1</value>
-				<value>listString2</value>
-			</list>
-		</property>
+		<property name="someList" ref="listObj" />
 		<property name="someMap">
 			<map>
 				<entry key="ttt">
@@ -86,6 +82,11 @@
 			</map>
 		</property>
 	</bean>
+
+	<util:list id="listObj">
+		<value>listString1</value>
+		<value>listString2</value>
+	</util:list>
 
 	<bean id="sysMessage" class="com.laudandjolynn.springtest.springtechmanual.Message"
 		scope="prototype" />
