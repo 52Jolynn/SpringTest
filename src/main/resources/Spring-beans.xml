@@ -9,7 +9,6 @@
 		<property name="helloWorld" value="Hello! Justin!"></property>
 	</bean>
 
-<<<<<<< HEAD
 	<bean id="helloBean2"
 		class="com.laudandjolynn.springtest.springtechmanual.HelloBean2">
 		<constructor-arg value="Justin" index="0" />
@@ -36,13 +35,15 @@
 	<bean id="someBean" class="com.laudandjolynn.springtest.springtechmanual.SomeBean"
 		parent="abstractSomeBean">
 		<property name="age" value="21" />
-=======
+	</bean>
+
 	<bean id="writter"
 		class="com.laudandjolynn.springtest.springtechmanual.FloppyWritter" />
 
 	<bean id="deviceWritterBusiness"
 		class="com.laudandjolynn.springtest.springtechmanual.DeviceWritterBusiness">
 		<property name="writter" ref="writter"></property>
->>>>>>> refs/heads/origin
 	</bean>
+</beans>
+
 </beans>
