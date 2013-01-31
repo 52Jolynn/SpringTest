@@ -12,6 +12,7 @@
 
 	<!-- Bean配置 -->
 	<import resource="Spring-beans.xml" />
+	<import resource="Spring-AOP-beans.xml" />
 	<!-- AOP配置 -->
-	<!-- <aop:aspectj-autoproxy /> -->
+	<aop:aspectj-autoproxy />
 </beans>
