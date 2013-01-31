@@ -13,5 +13,9 @@
 	<!-- Bean配置 -->
 	<import resource="Spring-beans.xml" />
 	<!-- AOP配置 -->
+<<<<<<< HEAD
 	<!-- <aop:aspectj-autoproxy /> -->
+=======
+	<aop:aspectj-autoproxy />
+>>>>>>> refs/heads/origin
 </beans>
